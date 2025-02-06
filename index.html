@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="SynthDetoxM: Modern LLMs are Few-Shot Parallel Detoxification Data Annotators">
+  <meta property="og:title" content="SynthDetoxM"/>
+  <meta property="og:description" content="Modern LLMs are Few-Shot Parallel Detoxification Data Annotators"/>
+  <meta property="og:url" content="https://s-nlp.github.io/synthdetoxm/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <!-- <meta property="og:image" content="static/image/your_banner_image.png" /> -->
+  <!-- <meta property="og:image:width" content="1200"/> -->
+  <!-- <meta property="og:image:height" content="630"/> -->
+
+
+  <meta name="twitter:title" content="SynthDetoxM">
+  <meta name="twitter:description" content="Modern LLMs are Few-Shot Parallel Detoxification Data Annotators">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/scheme.png">
+  <meta name="twitter:card" content="Modern LLMs are Few-Shot Parallel Detoxification Data Annotators">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="NLP, Synthetic data, Dataset, Text Style Transfer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>SynthDetoxM</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .table-container {
+           width: 80%; /* Adjust as needed */
+           margin: auto;
+           overflow-x: auto; /* Makes the table scrollable horizontally if it overflows */
+       }
+   
+       table {
+           width: 100%;
+           border-collapse: collapse;
+       }
+   
+       th, td {
+           border: 1px solid #ddd; /* Light grey border */
+           padding: 8px;
+           text-align: left;
+       }
+   
+       th {
+           background-color: #f2f2f2; /* Light grey background for headers */
+       }
+       tr:nth-child(even) {background-color: #f9f9f9;} /* Zebra striping */
+        .highlight-grey {
+           background-color: #f0f0f0; /* Light grey */
+       }
+       .image-container-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 900px;
+    margin: 0 auto;
+  }
+
+  .image-container-2 img {
+    width: 100%;
+    height: auto;
+  }
+
+  .image-container-2 h2 {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .image-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Added to handle wrapping on smaller screens */
+  }
+
+  .image-container {
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+    width: calc(50% - 20px); /* Adjust width for two columns with margins */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    min-width: 400px; /* Ensure images don't get too small */
+  }
+
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    /* max-height: 500px;  Removed max-height to allow images to scale */
+  }
+  @media (max-width: 768px) { /* Adjust breakpoint as needed */
+    .image-container {
+      width: 100%; /* Full width on smaller screens */
+      margin: 10px 0; /* Adjust margins for smaller screens */
+    }
+  }
+   </style>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">SynthDetoxM: Modern LLMs are Few-Shot Parallel Detoxification Data Annotators</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="mailto:Daniil.Moskovskiy@skoltech.ru" target="_blank">Daniil Moskovskiy</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:sushko@airi.net" target="_blank">Nikita Sushko</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:Sergey.Pletenev@skoltech.ru" target="_blank">Sergey Pletenev</a>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:tutubalina@airi.net" target="_blank">Elena Tutubalina</a>,
+              </span>
+              <span class="author-block">
+                <a href="mailto:A.Panchenko@skoltech.ru" target="_blank">Alexander Panchenko</a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Skoltech, AIRI, HSE, ISP RAS Research Center for Trusted Artificial Intelligence<br>NAACL Main 2025</span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2502.06394" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/s-nlp/synthdetoxm" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+                </span>
+
+                <!-- Huggingface link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/s-nlp/synthdetoxm" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <img src='static/images/hf-logo.svg'></i>
+                  </span>
+                  <span>Huggingface</span>
+                </a>
+                </span>
+
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="image-row">
+        <div class="image-container-2">
+          <img src="static/images/scheme.png" alt="SynthDetoxM Data Generation Pipeline.">
+           <!-- <img src="static/images/scheme.pdf" alt="SynthDetoxM Data Generation Pipeline."> -->
+          <!-- <h2 class="subtitle has-text-centered">
+            An illustration of the proposed approach for collecting and generating the SynthDetoxM multilingual text detoxification dataset.
+          </h2> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Existing approaches to multilingual text detoxification are hampered by the scarcity of parallel multilingual datasets. In this work we introduce a pipeline for cross-lingual parallel detoxification data generation. We also introduce <strong>SynthDetoxM</strong>, a manually collected and synthetically generated multilingual parallel text detoxification dataset comprising 16,000 high-quality detoxification sentence pairs across German, French, Spanish and Russian. The data was sourced from different toxicity evaluation datasets and then rewritten with nine modern open-source LLMs in few-shot setting. Our experiments demonstrate that models trained on our data achieve superior performance to those trained on the human-annotated MultiParaDetox dataset even in data limited setting. Models, trained on <strong>SynthDetoxM</strong> outperform all evaluated LLMs in few-shot setting. We release our dataset and code to help further research in multilingual text detoxification.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div style="display:flex;justify-content:center;align-items:center;">
+
+        <div style="width: 30%; margin: 5px;">
+          <img src="static/images/grouped_bar_chart.png" alt="Number of Accepted Samples by LLM and Language." style="width: 100%;">
+          <h2 style="text-align: center; font-size: 1em; margin-top: 5px;">
+            Number of accepted samples into the final SynthDetoxM~dataset with respect to the LLM by language.
+          </h2>
+        </div>
+        <div style="width: 30%; margin: 5px;">
+          <img src="static/images/language_toxicity_histogram_camera_ready.png" alt="Toxicity Distribution Histograms." style="width: 100%;">
+          <h2 style="text-align: center; font-size: 1em; margin-top: 5px;">
+            Toxicities of the examples in the dataset. Original toxic texts are in orange, detoxified texts are in blue. Gaussian smoothing is applied for readability.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methodology</h2>
+        <div class="content has-text-justified">
+          <p>
+            This work introduces a pipeline for cross-lingual parallel detoxification data generation. The approach leverages large language models (LLMs) to create synthetic data, addressing the lack of parallel multilingual detoxification datasets. The methodology involves the following steps:
+          </p>
+          <ol>
+            <li><strong>Data Collection:</strong> Toxic texts were manually collected from publicly available datasets in German, French, Spanish, and Russian.  Only samples marked as toxic by human annotators were selected.  Filtering based on Perspective API based Style Transfer Accuracy (STA) and LaBSE-based Similarity (SIM) metrics, was used to enhance data quality.</li>
+            <li><strong>Parallel Data Generation:</strong> Several open-source LLMs were used in a few-shot setting to generate detoxified versions of the collected toxic texts. The models used were: Qwen 2.5 32B, Command-R 32B, Gemma 2 27B, Aya Expanse (32B and 8B), Mistral Small 22B, Mistral Nemo 12B, and Llama 3.1 (70B and 8B).</li>
+            <li><strong>Few-Shot Example Mining:</strong>  The best toxic/non-toxic pairs for few-shot prompting were selected by calculating a score based on STA and SIM metrics from a multilingual toxicity detection dataset.  For French, 10 sentences were manually detoxified due to a lack of representation in the existing dataset.</li>
+          <li><strong>Filtering and Ranking:</strong> Generated detoxifications were filtered using a refusal classification model, and a threshold-based non-detoxifiability metric.  The remaining detoxifications were ranked by the product of their STA and SIM metrics, and the top-scoring examples were selected.</li>
+             <li><strong>Dataset Composition:</strong> The final dataset, SynthDetoxM, consists of 16,000 parallel toxic/non-toxic text pairs across Spanish, German, Russian, and French (4,000 per language).</li>
+
+            <li><strong>Evaluation:</strong> The quality of SynthDetoxM was evaluated by training sequence-to-sequence models (mT0-XL) on different folds of the dataset and comparing their performance to models trained on the human-annotated MultiParaDetox dataset.  The evaluation used the metrics defined in the MultiParaDetox shared task:</li>
+          <ul>
+                <li><strong>Style Transfer Accuracy (STA):</strong>  Uses a multilingual XLM-R text classification model to measure toxicity reduction.</li>
+                <li><strong>Content Similarity (SIM):</strong> Calculates the cosine distance between LaBSE embeddings of the source and generated texts.</li>
+                <li><strong>Fluency (FL):</strong> Uses ChrF1 score (though limitations of this metric are discussed in Appendix B of the paper).</li>
+                <li><strong>Joint Score (J):</strong>  Combines STA, SIM, and ChrF1 into a single score: \[\textbf{J} = \frac{1}{n}\sum\limits_{i=1}^{n}\textbf{STA}(y_i) \cdot \textbf{SIM}(x_i,y_i) \cdot \textbf{ChrF1}(x_i, y_i)\] </li>
+          </ul>
+          <li><strong>SBS evaluation:</strong> To further evaluate the applicability of the proposed dataset for training detoxification language models, a Side-by-side evaluation was carried out using GPT-4o as a judge.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Results</h2>
+    <div class="container">
+      <div class="image-row">
+        <div class="image-container-2" style="margin-bottom: 20px;">
+          <img src="static/images/sbs-overall.png" alt="Side by Side comparisions between the final models">
+            <!-- <img src="static/images/scheme.pdf" alt="SynthDetoxM Data Generation Pipeline."> -->
+          <h2 class="subtitle has-text-centered">
+            Side-by-side comparision between the final models in all languages.
+          </h2>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="image-row" style="flex-wrap: nowrap; margin-top: 20px;">
+          <div class="image-container-2">
+            <img src="static/images/sbs-de.png" alt="Side by Side comparisions in German">
+            <!-- <img src="static/images/scheme.pdf" alt="SynthDetoxM Data Generation Pipeline."> -->
+            <h2 class="subtitle has-text-centered">
+              Side-by-side comparision between the final models in German.
+            </h2>
+          </div>
+          <div class="image-container-2">
+            <img src="static/images/sbs-ru.png" alt="Side by Side comparisions in Russian">
+            <!-- <img src="static/images/scheme.pdf" alt="SynthDetoxM Data Generation Pipeline."> -->
+            <h2 class="subtitle has-text-centered">
+              Side-by-side comparision between the final models in Russian.
+            </h2>
+          </div>
+          <div class="image-container-2">
+            <img src="static/images/sbs-es.png" alt="Side by Side comparisions in Spanish">
+            <!-- <img src="static/images/scheme.pdf" alt="SynthDetoxM Data Generation Pipeline."> -->
+            <h2 class="subtitle has-text-centered">
+              Side-by-side comparision between the final models in Spanish.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>   
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+         <p>
+             The table below presents the Joint (J) scores from the automatic evaluation of different multilingual text detoxification approaches.  The models were evaluated on Spanish, German, and Russian using the test set from MultiParaDetox.
+         </p>
+            <div class="table-container">
+                <table style="border-collapse: collapse; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px;"></th>
+                            <th style="border: 1px solid black; padding: 8px;">Spanish</th>
+                            <th style="border: 1px solid black; padding: 8px;">German</th>
+                            <th style="border: 1px solid black; padding: 8px;">Russian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">Human References</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.709</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.733</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.732</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="border: 1px solid black; padding: 8px; background-color: #ddd;"><strong>Baselines</strong></td>
+                        </tr>
+                        <tr class = "highlight-grey">
+                            <td style="border: 1px solid black; padding: 8px;">Duplicate</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.090</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.287</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.048</td>
+                        </tr>
+                        <tr class = "highlight-grey">
+                            <td style="border: 1px solid black; padding: 8px;">Delete</td>
+                            <td style="border: 1px solid black; padding: 8px;"><strong>0.319</strong></td>
+                            <td style="border: 1px solid black; padding: 8px;"><strong>0.362</strong></td>
+                            <td style="border: 1px solid black; padding: 8px;"><strong>0.255</strong></td>
+                        </tr>
+                        <tr class = "highlight-grey">
+                            <td style="border: 1px solid black; padding: 8px;">Backtranslation</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.275</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.233</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.223</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="border: 1px solid black; padding: 8px; background-color: #ddd;"><strong>Supervised Approaches</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">MultiParaDetox</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.344</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.446</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.472</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">SynthDetoxM (Batch)</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.402</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.460</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.475</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid black; padding: 8px;">SynthDetoxM (Full)</td>
+                            <td style="border: 1px solid black; padding: 8px;"><u><strong>0.470</strong></u></td>
+                            <td style="border: 1px solid black; padding: 8px;"><u><strong>0.482</strong></u></td>
+                            <td style="border: 1px solid black; padding: 8px;"><u><strong>0.546</strong></u></td>
+                        </tr>
+                         <tr>
+                            <td colspan="4" style="border: 1px solid black; padding: 8px; background-color: #ddd;"><strong>LLM-based Approaches</strong></td>
+                        </tr>
+                         <tr>
+                            <td style="border: 1px solid black; padding: 8px;">Gemma 2</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.380</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.353</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.404</td>
+                        </tr>
+                         <tr>
+                            <td style="border: 1px solid black; padding: 8px;">Mistral Nemo</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.290</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.286</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.258</td>
+                        </tr>
+                         <tr>
+                            <td style="border: 1px solid black; padding: 8px;">Command R</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.344</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.328</td>
+                            <td style="border: 1px solid black; padding: 8px;">0.402</td>
+                        </tr>
+                         <tr>
+                            <td style="border: 1px solid black; padding: 8px;">Qwen 2.5</td>
+                            <td style="border: 1px solid black; padding: 8px;"><strong>0.443</strong></td>
+                            <td style="border: 1px solid black; padding: 8px;"><strong>0.402</strong></td>
+                            <td style="border: 1px solid black; padding: 8px;"><strong>0.428</strong></td>
+                        </tr>
+                        <tr>
+                          <td style="border: 1px solid black; padding: 8px;">Llama 3.1 8B</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.341</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.394</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.357</td>
+                        </tr>
+                        <tr>
+                          <td style="border: 1px solid black; padding: 8px;">Aya Expanse 8B</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.246</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.305</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.225</td>
+                        </tr>
+                        <tr>
+                          <td style="border: 1px solid black; padding: 8px;">Aya Expanse 32B</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.320</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.399</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.323</td>
+                        </tr>
+                        <tr>
+                          <td style="border: 1px solid black; padding: 8px;">Mistral Small</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.308</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.371</td>
+                          <td style="border: 1px solid black; padding: 8px;">0.273</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                <strong>Key findings:<strong>
+            </p>
+                <ul>
+                    <li>Models trained on <b>SynthDetoxM</b> outperform those trained on the human-annotated MultiParaDetox dataset in terms of the J score, even when using a comparable amount of data (SynthDetoxM (Batch)).</li>
+                    <li>Training on the full <b>SynthDetoxM</b> dataset yields the highest J scores across all languages.</li>
+                    <li>Adding human-sourced samples to the training data <b>reduces</b> J scores across all languages.</li>
+                    <li>The full <b>SynthDetoxM</b> model, also outperforms LLM baselines.</li>
+                </ul>
+           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content is-light">
+    <h2 class="title">BibTeX</h2>
+        <pre><code>@misc{moskovskiy2025synthdetoxmmodernllmsfewshot,
+          title={SynthDetoxM: Modern LLMs are Few-Shot Parallel Detoxification Data Annotators}, 
+          author={Daniil Moskovskiy and Nikita Sushko and Sergey Pletenev and Elena Tutubalina and Alexander Panchenko},
+          year={2025},
+          eprint={2502.06394},
+          archivePrefix={arXiv},
+          primaryClass={cs.CL},
+          url={https://arxiv.org/abs/2502.06394}, 
+    }</code></pre>
+  </div>
+</section>
+<!--End BibTex citation -->  
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
