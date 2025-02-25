@@ -1,0 +1,5 @@
+datasets==3.0.1
+fast-langdetect==0.2.2
+google-api-python-client==2.147.0
+pandas==2.2.3
+python-dotenv==1.0.1

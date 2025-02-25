@@ -1,0 +1,34 @@
+{
+    "train_args": {
+        "do_train": true,
+        "do_eval": true,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "learning_rate": 1e-4,
+        "weight_decay": 0,
+        "num_train_epochs": 1,
+        "gradient_accumulation_steps": 1,
+        "logging_strategy": "steps",
+        "logging_steps": 1,
+        "save_strategy": "epoch",
+        "save_total_limit": 1,
+        "warmup_steps": 1,
+        "report_to": "wandb",
+        "optim": "adafactor",
+        "lr_scheduler_type": "linear",
+        "predict_with_generate": true,
+        "bf16": false,
+        "gradient_checkpointing": true,
+        "output_dir": "/disk/4tb/sushko/detox/",
+        "seed": 42
+    },
+    "model_args": {
+        "model_name": "/disk/4tb/sushko/detox/mt0_xl_full_set/mt0_large_batch_0/checkpoint-3000/"
+    },
+    "data_args": {
+        "train_data_path": "../data/paradetox_orig.csv",
+        "eval_data_path": "../data/rudetox_eval.csv",
+        "eval_size": 0.1,
+        "use_translated_paradetox": false
+    }
+}
